@@ -25,9 +25,13 @@ def test_check_typst_fails_to_run() -> None:
         mock_result = MagicMock()
         mock_result.returncode = 1
         mock_result.stderr = "error"
-        with patch(
-            "typst2pptx.dependencies.subprocess.run", return_value=mock_result
-        ), pytest.raises(RuntimeError, match="failed to run"):
+        with (
+            patch(
+                "typst2pptx.dependencies.subprocess.run",
+                return_value=mock_result,
+            ),
+            pytest.raises(RuntimeError, match="failed to run"),
+        ):
             check_typst("typst")
 
 
@@ -63,10 +67,13 @@ def test_check_python_packages_one_missing() -> None:
 
 
 def test_check_python_packages_multiple_missing() -> None:
-    with patch(
-        "typst2pptx.dependencies.version",
-        side_effect=PackageNotFoundError("pkg"),
-    ), pytest.raises(RuntimeError, match="Missing required packages"):
+    with (
+        patch(
+            "typst2pptx.dependencies.version",
+            side_effect=PackageNotFoundError("pkg"),
+        ),
+        pytest.raises(RuntimeError, match="Missing required packages"),
+    ):
         check_python_packages()
 
 
