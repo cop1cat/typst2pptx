@@ -1,9 +1,11 @@
 [project]
 name = "typst2pptx"
 description = "Convert Typst presentations to PPTX"
-
 version = "0.1.0"
 requires-python = ">=3.12"
+readme = "README.md"
+license = { text = "MIT" }
+urls = { Homepage = "https://github.com/cop1cat/typst2pptx" }
 dependencies = [
     "typer>=0.12",
     "pydantic>=2.0",
