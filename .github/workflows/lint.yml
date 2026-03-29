@@ -1,0 +1,36 @@
+name: Lint & Type Check
+
+on:
+  pull_request:
+    branches: ["main"]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install uv
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Ensure uv is on PATH
+        run: echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+      - name: Install project
+        run: uv sync --frozen --extra dev
+
+      - name: Run Ruff (lint)
+        run: uv run ruff check .
+
+      - name: Run Ruff (format check)
+        run: uv run ruff format --check .
+
+      - name: Run MyPy
+        run: uv run mypy . --explicit-package-bases --cache-dir=/dev/null

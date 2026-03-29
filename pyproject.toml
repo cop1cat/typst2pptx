@@ -1,0 +1,26 @@
+[project]
+name = "typst2pptx"
+description = "Convert Typst presentations to PPTX"
+
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "typer>=0.12",
+    "pydantic>=2.0",
+    "pymupdf>=1.24",
+    "python-pptx>=1.0",
+    "Pillow>=10.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "mypy>=1.19.1",
+    "pre-commit>=4.5.1",
+    "pytest>=8.0.0",
+    "pytest-asyncio>=0.23.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.15.4",
+]
+
+[project.scripts]
+typst2pptx = "typst2pptx.src.cli:app"
