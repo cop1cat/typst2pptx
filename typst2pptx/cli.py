@@ -4,6 +4,7 @@ from pathlib import Path
 from typing import Annotated
 
 import typer
+
 from typst2pptx.config import ConvertConfig
 from typst2pptx.converter import convert
 from typst2pptx.dependencies import check_all

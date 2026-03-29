@@ -23,4 +23,4 @@ dev = [
 ]
 
 [project.scripts]
-typst2pptx = "typst2pptx.src.cli:app"
+typst2pptx = "typst2pptx.cli:app"

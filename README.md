@@ -1,4 +1,4 @@
-# typst2pptx
+# `typst2pptx`
 
 Convert Typst presentations to PPTX.
 

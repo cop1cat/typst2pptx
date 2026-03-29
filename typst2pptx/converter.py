@@ -8,6 +8,7 @@ import fitz
 from pptx import Presentation as PresentationFactory
 from pptx.presentation import Presentation
 from pptx.util import Inches
+
 from typst2pptx.config import ConvertConfig
 
 logger = logging.getLogger(__name__)
