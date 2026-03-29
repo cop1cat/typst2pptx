@@ -830,10 +830,12 @@ dependencies = [
 dev = [
     { name = "mypy" },
     { name = "pre-commit" },
+    { name = "ruff" },
+]
+tests = [
     { name = "pytest" },
     { name = "pytest-asyncio" },
     { name = "pytest-cov" },
-    { name = "ruff" },
 ]
 
 [package.metadata]
@@ -843,14 +845,14 @@ requires-dist = [
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=4.5.1" },
     { name = "pydantic", specifier = ">=2.0" },
     { name = "pymupdf", specifier = ">=1.24" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=8.0.0" },
-    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=0.23.0" },
-    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5.0.0" },
+    { name = "pytest", marker = "extra == 'tests'", specifier = ">=8.0.0" },
+    { name = "pytest-asyncio", marker = "extra == 'tests'", specifier = ">=0.23.0" },
+    { name = "pytest-cov", marker = "extra == 'tests'", specifier = ">=5.0.0" },
     { name = "python-pptx", specifier = ">=1.0" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.15.4" },
     { name = "typer", specifier = ">=0.12" },
 ]
-provides-extras = ["dev"]
+provides-extras = ["dev", "tests"]
 
 [[package]]
 name = "virtualenv"
