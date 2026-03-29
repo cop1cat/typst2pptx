@@ -18,10 +18,10 @@ app = typer.Typer(
 
 def _setup_logging(verbose: bool) -> None:
     """
-    Настраивает уровень логирования.
+    Configure the logging level.
 
     Args:
-        verbose (bool): Если True — выводит DEBUG сообщения.
+        verbose (bool): If True, enable DEBUG output.
     """
     level = logging.DEBUG if verbose else logging.INFO
     logging.basicConfig(
@@ -32,14 +32,14 @@ def _setup_logging(verbose: bool) -> None:
 
 def _resolve_output(input_path: Path, output: Path | None) -> Path:
     """
-    Определяет путь для выходного файла.
+    Determine the output file path.
 
     Args:
-        input_path (Path): Путь к исходному .typ файлу.
-        output (Path | None): Явно указанный путь или None.
+        input_path (Path): Path to the source .typ file.
+        output (Path | None): Explicitly provided output path, or None.
 
     Returns:
-        Path: Итоговый путь к .pptx файлу.
+        Path: Resolved path to the .pptx file.
     """
     if output is not None:
         return output
@@ -68,7 +68,7 @@ def main(
     ] = False,
 ) -> None:
     """
-    Конвертирует .typ файл в .pptx через PDF-рендер.
+    Convert a .typ file to .pptx via PDF rendering.
     """
     _setup_logging(verbose)
 

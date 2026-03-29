@@ -15,13 +15,13 @@ _PACKAGE_IMPORT_TO_DIST: dict[str, str] = {
 
 def check_typst(typst_bin: str) -> None:
     """
-    Проверяет наличие typst CLI в системе.
+    Verify that the typst CLI is available on the system.
 
     Args:
-        typst_bin (str): Путь или имя исполняемого файла typst.
+        typst_bin (str): Path or name of the typst executable.
 
     Raises:
-        RuntimeError: Если typst не найден или не запускается.
+        RuntimeError: If typst is not found or fails to run.
     """
     if not shutil.which(typst_bin):
         raise RuntimeError(
@@ -45,10 +45,10 @@ def check_typst(typst_bin: str) -> None:
 
 def check_python_packages() -> None:
     """
-    Проверяет наличие обязательных Python-пакетов.
+    Verify that all required Python packages are installed.
 
     Raises:
-        RuntimeError: Если один или несколько пакетов не установлены.
+        RuntimeError: If one or more packages are missing.
     """
     missing = []
 
@@ -69,13 +69,13 @@ def check_python_packages() -> None:
 
 def check_all(typst_bin: str) -> None:
     """
-    Выполняет все проверки зависимостей.
+    Run all dependency checks.
 
     Args:
-        typst_bin (str): Путь или имя исполняемого файла typst.
+        typst_bin (str): Path or name of the typst executable.
 
     Raises:
-        RuntimeError: Если какая-либо зависимость отсутствует.
+        RuntimeError: If any dependency is missing.
     """
     check_python_packages()
     check_typst(typst_bin)

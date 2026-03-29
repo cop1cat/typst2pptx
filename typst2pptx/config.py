@@ -3,11 +3,11 @@ from pydantic import BaseModel, Field
 
 class ConvertConfig(BaseModel):
     """
-    Конфигурация конвертации.
+    Conversion configuration.
 
     Attributes:
-        dpi (int): Разрешение рендера страниц PDF в PNG.
-        typst_bin (str): Путь или имя исполняемого файла typst.
+        dpi (int): Render resolution for PDF-to-PNG conversion.
+        typst_bin (str): Path or name of the typst executable.
     """
 
     dpi: int = Field(default=150, ge=72, le=600)

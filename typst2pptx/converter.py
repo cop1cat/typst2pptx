@@ -16,18 +16,18 @@ logger = logging.getLogger(__name__)
 
 def _compile_typst(typ_path: Path, config: ConvertConfig) -> bytes:
     """
-    Компилирует .typ файл в PDF через typst CLI.
+    Compile a .typ file to PDF using the typst CLI.
 
     Args:
-        typ_path (Path): Путь к исходному .typ файлу.
-        config (ConvertConfig): Конфигурация конвертации.
+        typ_path (Path): Path to the source .typ file.
+        config (ConvertConfig): Conversion configuration.
 
     Returns:
-        bytes: Содержимое PDF файла.
+        bytes: PDF file contents.
 
     Raises:
-        subprocess.CalledProcessError: Если typst завершился с ошибкой.
-        FileNotFoundError: Если входной файл не существует.
+        FileNotFoundError: If the input file does not exist.
+        subprocess.CalledProcessError: If typst exits with a non-zero code.
     """
     if not typ_path.exists():
         raise FileNotFoundError(f"Input file not found: {typ_path}")
@@ -58,14 +58,14 @@ def _pdf_to_images(
     pdf_bytes: bytes, dpi: int
 ) -> list[tuple[bytes, tuple[int, int]]]:
     """
-    Конвертирует страницы PDF в PNG изображения.
+    Render PDF pages as PNG images.
 
     Args:
-        pdf_bytes (bytes): Содержимое PDF файла.
-        dpi (int): Разрешение рендера.
+        pdf_bytes (bytes): PDF file contents.
+        dpi (int): Render resolution.
 
     Returns:
-        list[tuple[bytes, tuple[int, int]]]: Список пар (png_bytes, (width_px, height_px)).
+        list[tuple[bytes, tuple[int, int]]]: List of (png_bytes, (width_px, height_px)) pairs.
     """
     doc = fitz.open(stream=pdf_bytes, filetype="pdf")
     scale = dpi / 72
@@ -86,14 +86,14 @@ def _build_pptx(
     dpi: int,
 ) -> Presentation:
     """
-    Собирает PPTX из списка PNG изображений.
+    Build a PPTX presentation from a list of PNG images.
 
     Args:
-        pages (list[tuple[bytes, tuple[int, int]]]): Страницы как PNG + размеры в пикселях.
-        dpi (int): Разрешение, использованное при рендере.
+        pages (list[tuple[bytes, tuple[int, int]]]): Pages as PNG bytes with pixel dimensions.
+        dpi (int): Resolution used during rendering.
 
     Returns:
-        Presentation: Готовый объект презентации.
+        Presentation: Assembled presentation object.
     """
     _, (first_w, first_h) = pages[0]
     slide_w = Inches(first_w / dpi)
@@ -121,16 +121,16 @@ def _build_pptx(
 
 def convert(typ_path: Path, output_path: Path, config: ConvertConfig) -> None:
     """
-    Конвертирует .typ файл в .pptx.
+    Convert a .typ file to .pptx.
 
     Args:
-        typ_path (Path): Путь к исходному .typ файлу.
-        output_path (Path): Путь для сохранения .pptx файла.
-        config (ConvertConfig): Конфигурация конвертации.
+        typ_path (Path): Path to the source .typ file.
+        output_path (Path): Path to save the .pptx file.
+        config (ConvertConfig): Conversion configuration.
 
     Raises:
-        FileNotFoundError: Если входной файл не существует.
-        subprocess.CalledProcessError: Если typst завершился с ошибкой.
+        FileNotFoundError: If the input file does not exist.
+        subprocess.CalledProcessError: If typst exits with a non-zero code.
     """
     pdf_bytes = _compile_typst(typ_path, config)
     pages = _pdf_to_images(pdf_bytes, config.dpi)
